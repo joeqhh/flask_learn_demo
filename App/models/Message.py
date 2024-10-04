@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from App import db
+from App.exts import db
 
 @dataclass
 class Message(db.Model):

@@ -9,7 +9,7 @@ def create_app():
 
     username = 'root'
     password = 'qihao387387'
-    database = 'flask_demo'
+    database = 'daka'
     db_url = "mysql+pymysql://{}:{}@localhost:3306/{}".format(username, password, database)
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

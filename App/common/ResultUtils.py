@@ -1,6 +1,6 @@
 import dataclasses
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, date
 
 
 # from App.models.User import User
@@ -44,13 +44,25 @@ class ResultUtils:
                 res = []
                 for i in data:
                     dict_i = dataclasses.asdict(i)
-                    if  dict_i.__contains__('time')and isinstance(dict_i['time'], datetime):
-                        dict_i['time'] = dict_i['time'].strftime('%Y-%m-%d %H:%M:%S')
+                    if 'is_delete' in dict_i.keys(): del dict_i['is_delete']
+                    for key in dict_i.keys():
+                        if isinstance(dict_i[key], datetime):
+                            dict_i[key] = dict_i[key].strftime('%Y-%m-%d %H:%M:%S')
+                        if isinstance(dict_i[key], date):
+                            dict_i[key] = dict_i[key].strftime('%Y-%m-%d')
+                        if isinstance(dict_i[key], bytes):
+                            dict_i[key] =  int.from_bytes(dict_i[key], byteorder='big')
                     res.append(dict_i)
             else:
                 dict_data = dataclasses.asdict(data)
-                if dict_data.__contains__('time') and isinstance(dict_data['time'], datetime):
-                    dict_data['time'] = dict_data['time'].strftime('%Y-%m-%d %H:%M:%S')
+                if 'is_delete' in dict_data.keys(): del dict_data['is_delete']
+                for key in dict_data.keys():
+                    if isinstance(dict_data[key], datetime):
+                        dict_data[key] = dict_data[key].strftime('%Y-%m-%d %H:%M:%S')
+                    if isinstance(dict_data[key], date):
+                        dict_data[key] = dict_data[key].strftime('%Y-%m-%d')
+                    if isinstance(dict_data[key], bytes):
+                        dict_data[key] = int.from_bytes(dict_data[key], byteorder='big')
                 res = dict_data
         return res
 

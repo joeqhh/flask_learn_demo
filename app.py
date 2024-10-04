@@ -20,15 +20,15 @@ CORS(app,expose_headers=["Authorization"])
 def handle_business_exception(error):
     return ResultUtils.error(error)
 
-
-@app.before_request
-def before_request():
-    token = request.headers.get('Authorization')
-    path = request.path
-    if path != '/api/login':
-        if not token:
-            raise BusinessException(ErrorCode.PARAMS_ERROR,'Token is missing!')
-        else: RequestUtils.decode_token(token,app.config['SECRET_KEY'])
+#
+# @app.before_request
+# def before_request():
+#     token = request.headers.get('Authorization')
+#     path = request.path
+#     if path != '/api/login':
+#         if not token:
+#             raise BusinessException(ErrorCode.PARAMS_ERROR,'Token is missing!')
+#         else: RequestUtils.decode_token(token,app.config['SECRET_KEY'])
 
 
 if __name__ == '__main__':

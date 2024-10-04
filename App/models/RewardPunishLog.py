@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import date, datetime, time
-from App import db
+from App.exts import db
 
 @dataclass
 class RewardPunishLog(db.Model):
